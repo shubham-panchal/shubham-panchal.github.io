@@ -1,25 +1,646 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Name | Portfolio</title>
-  <style>
-    body { font-family: system-ui, sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
-    a { color: #0969da; }
-  </style>
-</head>
-<body>
-  <h1>Shubham Panchal</h1>
-  <p>Web developer who builds fast, clean, user-friendly apps.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Shubham Panchal | Frontend Developer</title>
+    <meta
+      name="description"
+      content="Shubham Panchal is a frontend developer in Mumbai with 4.5+ years of experience building production web apps in React, Next.js and Angular."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #eef2f8;
+        --ink: #13203d;
+        --muted: #55627f;
+        --line: #cbd4e4;
+        --cobalt: #2748e8;
+        --on-cobalt: #ffffff;
+        --mint: #bdebd8;
+        --butter: #ffe08a;
+        --blush: #ffc9c0;
+        --display:
+          "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --body:
+          "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #0f1730;
+          --ink: #eaf0ff;
+          --muted: #9fb0d6;
+          --line: #25325a;
+          --cobalt: #7c93ff;
+          --on-cobalt: #0f1730;
+          --mint: #2e6b57;
+          --butter: #8a6d1c;
+          --blush: #8c4a41;
+        }
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font: 400 1.0625rem/1.65 var(--body);
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--cobalt);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .wrap {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .skip {
+        position: absolute;
+        left: -999px;
+        top: 8px;
+        background: var(--cobalt);
+        color: var(--on-cobalt);
+        padding: 8px 14px;
+        border-radius: 8px;
+        z-index: 5;
+      }
+      .skip:focus {
+        left: 8px;
+      }
 
-  <h2>Projects</h2>
-  <ul>
-    <li><a href="https://github.com/you/project1">Project One</a>: what it does</li>
-    <li><a href="https://github.com/you/project2">Project Two</a>: what it does</li>
-  </ul>
+      header .wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .logo {
+        font: 700 1.25rem var(--display);
+        text-decoration: none;
+      }
+      nav {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      nav a {
+        text-decoration: none;
+        font-weight: 500;
+        color: var(--muted);
+      }
+      nav a:hover {
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 6px;
+        text-decoration-thickness: 2px;
+      }
 
-  <h2>Contact</h2>
-  <p><a href="mailto:you@example.com">you@example.com</a> | <a href="https://linkedin.com/in/you">LinkedIn</a></p>
-</body>
+      .hero {
+        padding: 72px 0 88px;
+      }
+      .hero h1 {
+        font: 700 clamp(2.75rem, 8vw, 5.75rem)/1.02 var(--display);
+        letter-spacing: -0.04em;
+        max-width: 14ch;
+      }
+      .hero h1 span {
+        display: block;
+        color: var(--cobalt);
+      }
+      .hero p {
+        max-width: 54ch;
+        margin-top: 32px;
+        font-size: 1.25rem;
+        color: var(--muted);
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 36px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-block;
+        padding: 14px 26px;
+        border-radius: 999px;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid var(--ink);
+        transition: transform 0.15s;
+      }
+      .btn.primary {
+        background: var(--cobalt);
+        border-color: var(--cobalt);
+        color: var(--on-cobalt);
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      section {
+        padding: 72px 0;
+        border-top: 1px solid var(--line);
+      }
+      h2 {
+        font: 700 clamp(1.75rem, 4vw, 2.5rem)/1.1 var(--display);
+        letter-spacing: -0.02em;
+        margin-bottom: 40px;
+      }
+
+      .project,
+      .job {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 28px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .project {
+        grid-template-columns: minmax(0, 360px) 1fr;
+        gap: 36px;
+        padding: 36px 0;
+      }
+      .project:first-of-type,
+      .job:first-of-type {
+        border-top: 1px solid var(--line);
+      }
+      img.thumb {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16/10;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        font-size: 0.9rem;
+        color: var(--ink);
+      }
+      .t1 {
+        background: var(--mint);
+      }
+      .t2 {
+        background: var(--butter);
+      }
+      .t3 {
+        background: var(--blush);
+      }
+      h3 {
+        font: 700 1.5rem/1.2 var(--display);
+        letter-spacing: -0.01em;
+      }
+      .project p {
+        margin: 8px 0 14px;
+        max-width: 62ch;
+        color: var(--muted);
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+        list-style: none;
+        padding: 0;
+      }
+      .tags li {
+        font-size: 0.875rem;
+        font-weight: 500;
+        padding: 3px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+      .links {
+        display: flex;
+        gap: 20px;
+        font-weight: 600;
+      }
+      .links a {
+        text-underline-offset: 5px;
+        text-decoration-thickness: 2px;
+        color: var(--cobalt);
+      }
+
+      .when {
+        font-weight: 600;
+        color: var(--muted);
+        padding-top: 4px;
+      }
+      .job .org {
+        color: var(--muted);
+        font-weight: 500;
+        margin-top: 2px;
+      }
+      .job ul {
+        margin: 14px 0 0;
+        padding-left: 20px;
+        max-width: 64ch;
+      }
+      .job li {
+        margin-bottom: 8px;
+      }
+      .job li::marker {
+        color: var(--cobalt);
+      }
+
+      .about {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 56px;
+      }
+      .about p + p {
+        margin-top: 16px;
+      }
+      .skills dt {
+        font: 700 1rem var(--display);
+        margin-top: 20px;
+      }
+      .skills dt:first-child {
+        margin-top: 0;
+      }
+      .skills dd {
+        color: var(--muted);
+      }
+      .edu {
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+      .edu strong {
+        font-family: var(--display);
+      }
+
+      .contact a.mail {
+        font: 700 clamp(1.5rem, 5vw, 3.25rem)/1.1 var(--display);
+        letter-spacing: -0.02em;
+        color: var(--cobalt);
+        text-underline-offset: 8px;
+        text-decoration-thickness: 3px;
+        word-break: break-word;
+      }
+      .contact p.lead {
+        max-width: 50ch;
+        color: var(--muted);
+        margin: -16px 0 24px;
+      }
+      .contact ul {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+        padding: 0;
+        margin-top: 28px;
+        flex-wrap: wrap;
+        font-weight: 600;
+      }
+      footer {
+        padding: 40px 0 56px;
+        color: var(--muted);
+        font-size: 0.9375rem;
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 720px) {
+        .project,
+        .job {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .about {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+        .hero {
+          padding: 40px 0 64px;
+        }
+        nav {
+          gap: 18px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .btn {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#projects">Skip to content</a>
+
+    <header>
+      <div class="wrap">
+        <a class="logo" href="#top">Shubham Panchal</a>
+        <nav aria-label="Main">
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <div class="wrap">
+        <div class="hero">
+          <h1>
+            Hi, I’m Shubham. <span>I build fast, polished web apps.</span>
+          </h1>
+          <p>
+            I’m a frontend developer in Mumbai with 4.5+ years of experience
+            shipping React, Next.js and Angular products, from high-traffic
+            consumer apps to enterprise dashboards.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#projects">See my projects</a>
+            <a
+              class="btn"
+              href="./resume/ShubhamPanchal_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Download resume</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <section id="projects">
+        <div class="wrap">
+          <h2>Projects</h2>
+
+          <article class="project">
+            <img
+              class="thumb t1"
+              src="images/audiovox.png"
+              alt="Audiovox headphone storefront homepage"
+              loading="lazy"
+            />
+            <div>
+              <h3>Audiovox Headphone Storefront</h3>
+              <p>
+                A full-stack headphone store with server-rendered product pages,
+                a cart that survives page reloads, and a demo checkout that
+                re-checks prices against the database before saving an order. A
+                protected admin dashboard lets the owner manage products.
+              </p>
+              <ul class="tags">
+                <li>Next.js 16</li>
+                <li>React</li>
+                <li>MongoDB</li>
+                <li>NextAuth.js</li>
+                <li>Tailwind CSS</li>
+              </ul>
+              <div class="links">
+                <a
+                  href="https://github.com/shubham-panchal/audiovox"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Source code</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <img
+              class="thumb t2"
+              src="images/elegant_home.png"
+              alt="Elegant Furniture Store homepage"
+              loading="lazy"
+            />
+            <div>
+              <h3>Elegant Furniture Store</h3>
+              <p>
+                A responsive e-commerce site with a product carousel, filtering,
+                grid view, wish list and cart. Redux and lazy loading cut load
+                time by 30% and kept layouts stable across devices.
+              </p>
+              <ul class="tags">
+                <li>React</li>
+                <li>Redux</li>
+                <li>Swiper.js</li>
+              </ul>
+              <div class="links">
+                <a
+                  href="https://elegant-ea.netlify.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Live demo</a
+                ><a
+                  href="https://github.com/shubham-panchal/elegant"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Source code</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="project">
+            <img
+              class="thumb t3"
+              src="images/forkify.png"
+              alt="Forkify recipe app search screen"
+              loading="lazy"
+            />
+            <div>
+              <h3>Forkify Recipe App</h3>
+              <p>
+                A recipe search and management app with pagination, bookmarks
+                saved in local storage, and a form for adding your own recipes.
+              </p>
+              <ul class="tags">
+                <li>React</li>
+                <li>Context API</li>
+                <li>React Forms</li>
+              </ul>
+              <div class="links">
+                <a
+                  href="https://forkify-ea.netlify.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Live demo</a
+                ><a
+                  href="https://github.com/shubham-panchal/forkify-app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Source code</a
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="wrap">
+          <h2>Experience</h2>
+
+          <article class="job">
+            <div class="when">Jan 2026 to now</div>
+            <div>
+              <h3>Frontend Developer</h3>
+              <div class="org">WebMD India</div>
+              <ul>
+                <li>
+                  Built a custom SSE stream handler whose answer display speed
+                  can be tuned from the CDN, so the product team changes it
+                  without a redeploy.
+                </li>
+                <li>
+                  Cut initial UI build time by 50% by using Claude Code with the
+                  Figma MCP to generate components straight from design files.
+                </li>
+                <li>
+                  Moved 70% of high-traffic legacy modules from vanilla
+                  JavaScript to a reusable Page Builder architecture, reducing
+                  technical debt.
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="job">
+            <div class="when">Jul 2022 to Jan 2026</div>
+            <div>
+              <h3>Frontend Developer</h3>
+              <div class="org">Jio Platforms Limited</div>
+              <ul>
+                <li>
+                  Built a web-based ad customization tool for internal teams
+                  that cut ad production time by more than 50%.
+                </li>
+                <li>
+                  Shipped real-time features for high-traffic live events
+                  (play-along contests, live feeds, anchor chats and polls),
+                  lifting user retention during broadcasts by 25%.
+                </li>
+                <li>
+                  Created reusable components and widgets shared across several
+                  mini-apps, improving development speed and consistency.
+                </li>
+                <li>
+                  Improved load times and responsiveness by 30 to 35% through
+                  lazy loading, asset compression and Webpack bundle analysis.
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="wrap about">
+          <div>
+            <h2>About me</h2>
+            <p>
+              I build production web apps where SEO and page speed drive
+              revenue, and enterprise dashboards where clean state management
+              and test coverage matter most.
+            </p>
+            <p>
+              I own features from design review to production, and I pick up new
+              frameworks quickly because I focus on the fundamentals underneath
+              them.
+            </p>
+            <div class="edu">
+              <strong>B.E. in Information Technology</strong><br />
+              University of Mumbai, 2018 to 2022
+            </div>
+          </div>
+          <dl class="skills">
+            <dt>Languages</dt>
+            <dd>JavaScript (ES6+), TypeScript, HTML5, CSS3/SCSS, Node.js</dd>
+            <dt>React and Next.js</dt>
+            <dd>
+              React 16 to 19, Hooks, Redux Toolkit, React Query, Server
+              Components, Server Actions
+            </dd>
+            <dt>Angular</dt>
+            <dd>
+              Angular 14 to 19, RxJS, NgRx, Signals, Standalone Components,
+              Reactive Forms
+            </dd>
+            <dt>Styling and UI</dt>
+            <dd>
+              Tailwind CSS, Angular Material, Design systems, Responsive design
+            </dd>
+            <dt>Tooling</dt>
+            <dd>Vite, Webpack, Git, GitHub, Azure, GCP, CI/CD</dd>
+            <dt>Concepts</dt>
+            <dd>
+              REST APIs, Micro-frontends, Accessibility, SEO, Performance
+              optimization
+            </dd>
+          </dl>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="wrap">
+          <h2>Let’s work together</h2>
+          <p class="lead">
+            I’m open to frontend roles and interesting projects. The quickest
+            way to reach me is email.
+          </p>
+          <a
+            class="mail"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="mailto:shubham1.panchal@gmail.com"
+            >shubham1.panchal@gmail.com</a
+          >
+          <ul>
+            <li>
+              <a
+                href="https://github.com/shubham-panchal"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com/in/shubham1panchal"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn</a
+              >
+            </li>
+            <li>
+              <a
+                href="./resume/ShubhamPanchal_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Resume (PDF)</a
+              >
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        © 2026 Shubham Panchal. Built with HTML and CSS, hosted on GitHub Pages.
+      </div>
+    </footer>
+  </body>
 </html>
